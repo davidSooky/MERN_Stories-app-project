@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import postRoutes from "./routes/posts.js";
+import userRoutes from "./routes/users.js";
 
 dotenv.config();
 const app = express();
@@ -13,8 +14,8 @@ app.use(express.json({limit: "30mb", extended: true}));
 app.use(express.urlencoded({limit: "30mb", extended: true}));
 app.use(cors());
 
-// Routes
 app.use("/posts", postRoutes);
+app.use("/user", userRoutes);
 
 mongoose.connect(process.env.DATABASE_CONNECTION, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => app.listen(PORT, () => console.log("Database connected and running...")))
