@@ -6,7 +6,7 @@ export default makeStyles((theme) => ({
       position: "relative",
       borderRadius: 15,
       display: "flex",
-      justifyContent: "center",
+      justifyContent: "space-evenly",
       flexDirection: "row",
       margin: '15px 0',
       alignItems: 'center',
@@ -161,20 +161,29 @@ export default makeStyles((theme) => ({
     toolbar: {
       display: 'flex',
       justifyContent: 'flex-end',
-      width: '400px',
+      width: '200px',
     },
     profile: {
       display: 'flex',
-      justifyContent: 'space-between',
-      width: '400px',
+      justifyContent: 'center',
+      width: '200px'
     },
     userName: {
-      display: 'flex',
+      display: "flex",
+      marginLeft: "10px",
+      color: "#fff",
       alignItems: 'center',
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "15px"
+      }
     },
     purple: {
       color: theme.palette.getContrastText(deepPurple[500]),
       backgroundColor: deepPurple[500],
+      [theme.breakpoints.down("sm")]: {
+        height: "30px",
+        width: "30px"
+      }
     },
   })
 );

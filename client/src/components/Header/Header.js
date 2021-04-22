@@ -1,19 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AppBar, Typography, IconButton, Menu, MenuItem, Fade, Toolbar, Avatar } from "@material-ui/core";
 import { green } from "@material-ui/core/colors";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import MenuIcon from '@material-ui/icons/Menu';
+
 import useStyles from "../../styles";
 
 const Header = ({ setOpen }) => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
     const location = useLocation().pathname;
+    const dispatch = useDispatch();
+    const history = useHistory();
 
-    const user = null;
+    useEffect(() => {
+        const token = user?.token;
+
+        setUser(JSON.parse(localStorage.getItem("profile")));
+    }, [location]);
+
     const handleOpen = () => {
         setAnchorEl(null);
         setOpen(true);
+    };
+
+    const logout = () => {
+        setAnchorEl(null);
+        dispatch({type: "LOGOUT"});
+        history.push("/auth");
+
+        setUser(null);
     };
 
     return (
@@ -46,7 +64,7 @@ const Header = ({ setOpen }) => {
                 onClose={() => setAnchorEl(null)}
             >
                 {user
-                    ?  <MenuItem>Logout</MenuItem>
+                    ?  <MenuItem onClick={logout}>Logout</MenuItem>
                     :  <MenuItem component={Link} to="/auth" onClick={() => setAnchorEl(null)}>Login</MenuItem>
                 }
                 {location === "/" ? <MenuItem onClick={handleOpen}>Create story</MenuItem> : ""}
