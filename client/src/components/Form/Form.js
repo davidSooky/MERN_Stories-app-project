@@ -17,7 +17,7 @@ const Form = ({ setOpen }) => {
     const [postData, setPostData] = useState({
         title:"", message:"", tags:"", selectedFile:""
     });
-    console.log(currentId);
+
     const classes = useStyles();
 
     useEffect(() => {
