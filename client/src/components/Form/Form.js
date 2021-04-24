@@ -17,7 +17,7 @@ const Form = ({ setOpen }) => {
     const [postData, setPostData] = useState({
         title:"", message:"", tags:"", selectedFile:""
     });
-
+    console.log(currentId);
     const classes = useStyles();
 
     useEffect(() => {
@@ -63,7 +63,7 @@ const Form = ({ setOpen }) => {
                         />
                     </label>
                 </div>
-                <Button className={classes.buttonSubmit} variant="outlined" color="primary" size="large" type="submit" fullWidth>Create</Button>
+                <Button className={classes.buttonSubmit} variant="outlined" color="primary" size="large" type="submit" fullWidth>{currentId === null ? "Create" : "Update"}</Button>
                 <Button className={classes.buttonClear} variant="outlined" color="secondary" size="large" onClick={clear} type="submit" fullWidth>Clear</Button>
             </form>
         </Paper>
