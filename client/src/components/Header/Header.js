@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import decode from "jwt-decode";
 import { AppBar, Typography, IconButton, Menu, MenuItem, Fade, Toolbar, Avatar } from "@material-ui/core";
 import { green } from "@material-ui/core/colors";
 import { Link, useLocation, useHistory } from "react-router-dom";
@@ -17,6 +18,12 @@ const Header = ({ setOpen }) => {
 
     useEffect(() => {
         const token = user?.token;
+
+        if(token) {
+            const decodedToken = decode(token);
+
+            if(decodedToken.exp * 1000 < new Date().getTime()) logout();
+        }
 
         setUser(JSON.parse(localStorage.getItem("profile")));
     }, [location]);
