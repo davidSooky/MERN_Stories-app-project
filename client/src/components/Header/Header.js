@@ -42,7 +42,7 @@ const Header = ({ setOpen }) => {
     };
 
     return (
-        <AppBar className={classes.appBar} position="static" color="inherit">
+        <AppBar className={classes.appBar} position="sticky" color="inherit">
             <Typography component={Link} to="/" className={classes.heading} variant="h3" align="center">Stories</Typography>
             <IconButton className={classes.menuBtn} aria-label="open menu" disableRipple onClick={(e) => setAnchorEl(e.currentTarget)}>
                 <MenuIcon style={{color: green[100]}} size="medium" />
@@ -70,11 +70,11 @@ const Header = ({ setOpen }) => {
                 TransitionComponent={Fade}
                 onClose={() => setAnchorEl(null)}
             >
+                {location === "/" && user ? <MenuItem onClick={handleOpen}>Create story</MenuItem> : ""}
                 {user
                     ?  <MenuItem onClick={logout}>Logout</MenuItem>
                     :  <MenuItem component={Link} to="/auth" onClick={() => setAnchorEl(null)}>Login</MenuItem>
                 }
-                {location === "/" ? <MenuItem onClick={handleOpen}>Create story</MenuItem> : ""}
             </Menu>
         </AppBar>
     );

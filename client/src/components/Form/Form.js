@@ -52,10 +52,10 @@ const Form = ({ setOpen }) => {
                 <TextField name="tags" variant="standard" label="Tags" fullWidth value={postData.tags} onChange={(e) => setPostData({...postData, tags: e.target.value.split(",")})} />
                 <div className={classes.fileInput}>
                     <label className={classes.uploadLabel}>
-                        <Button size="small" variant="contained">
+                        {/* <Button size="small" variant="contained">
                             <PermMediaIcon fontSize="medium" />
                             &nbsp;Select a picture...
-                        </Button>
+                        </Button> */}
                         <FileBase
                             type="file"
                             multiple={false}

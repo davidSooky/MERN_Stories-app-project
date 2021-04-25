@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card, CardActions, CardMedia, CardContent, Button, Typography } from "@material-ui/core";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
@@ -6,6 +6,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import moment from "moment";
 import { useDispatch } from "react-redux";
+
 import { deletePost, likePost } from "../../actions/posts";
 import { setCurrentID } from "../../actions/currentID";
 
@@ -21,6 +22,18 @@ const Post = ({ post, setOpen }) => {
         dispatch(setCurrentID(post._id));
         setOpen(true);
     };
+
+    useEffect(() => {
+        if(!user) {
+            const id = setTimeout(() => {
+                alert("Please login or sign up to create posts.");
+            }, 10000);
+
+            return () => {
+                clearTimeout(id);
+            }
+        }
+    }, [user]);
 
     const Likes = () => {
         if (post.likes.length > 0) {
@@ -57,7 +70,7 @@ const Post = ({ post, setOpen }) => {
                 <Typography variant="body2" component="p">{post.message}</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
-                <Button size="small" color="primary" disabled={!user.result} onClick={() =>  dispatch(likePost(post._id))}>
+                <Button size="small" color="primary" disabled={!user?.result} onClick={() => dispatch(likePost(post._id))}>
                     <Likes />
                 </Button>
                 {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (

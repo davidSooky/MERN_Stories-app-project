@@ -81,7 +81,7 @@ const Auth = () => {
                     {
                         !isSignup && (
                             <>
-                            <Typography align="center" variant="body2" style={{marginBottom: "10px"}}>or</Typography>
+                            <Typography align="center" variant="body2" style={{marginBottom: "10px"}}>or (Google Chrome only)</Typography>
                             <GoogleLogin
                                 clientId="260849353642-csbtelruhda0e3dkjcnvolt3sakksdcl.apps.googleusercontent.com"
                                 render={(renderProps) => (
