@@ -14,7 +14,7 @@ const Posts = ({ setOpen }) => {
 
     useEffect(() => {
         if(myStories) {
-            setFilteredPosts(posts.filter(post => post.creator === user?.result?._id));
+            setFilteredPosts(posts.filter(post => post.creator === user?.result?._id || post.creator === user?.result?.googleId));
         } else {
             setFilteredPosts([]);
         }
