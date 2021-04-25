@@ -17,6 +17,10 @@ app.use(cors());
 app.use("/posts", postRoutes);
 app.use("/user", userRoutes);
 
+app.get("/", (req, res) => {
+    res.send("Welcome to stories app API.");
+});
+
 mongoose.connect(process.env.DATABASE_CONNECTION, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => app.listen(PORT, () => console.log("Database connected and running...")))
     .catch((error) => console.log(error.message));
